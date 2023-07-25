@@ -1,0 +1,63 @@
+.pagination_list{
+    display: flex;
+    flex-direction: row;
+
+}
+
+.pagination{
+    display: flex !important;
+    justify-content: space-around;
+    border: none !important;
+    width: 1077px;
+}
+
+.pagination_number {
+    color: #474955 !important;
+    font-family: "Roboto" !important;
+    font-style: italic;
+background-color: white;
+    border: none !important;
+    padding: 10px;
+    
+}
+
+.pagination_number:focus{
+    background-color: white;
+    border: none;
+}
+
+.pagination_number:focus {
+    color:  #7EBC3C;
+    font-family: "Roboto";
+    font-style: italic;
+    background-color: white;
+    border: none;
+    
+}
+
+.pagination_number__active {
+    color: #7EBC3C;
+    border: none;
+    font-family: "Roboto";
+    font-style: italic;
+    background-color: white;
+    padding: 10px;
+}
+
+.pagination:focus{
+    background-color: white;
+    border: none;
+
+}
+
+.pagination_btn{
+    background-color: white;
+    border: none;
+    font-family: Roboto;
+font-size: 24px;
+font-weight: 500;
+line-height: 33px;
+letter-spacing: 0em;
+text-align: left;
+color: #474955
+}
