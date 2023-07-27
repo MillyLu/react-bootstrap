@@ -3,11 +3,11 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './index.module.css';
 
-export function PostsPagination({ setCurrentPage }) {
+export function PostsPagination({ setCurrentPage, allPages }) {
   const [active, setActive] = useState(1);
   const navigate = useNavigate();
   const items = [];
-  for (let number = 1; number <= 10; number++) {
+  for (let number = 1; number <= allPages; number++) {
     items.push(
       <button
         onClick={() => {
