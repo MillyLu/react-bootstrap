@@ -39,3 +39,7 @@
     width: 16px !important;
     height: 16px !important;
 }
+
+.form-control{
+    transition: none;
+}

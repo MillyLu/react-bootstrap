@@ -15,7 +15,7 @@
     color: #474955 !important;
     font-family: "Roboto" !important;
     font-style: italic;
-background-color: white;
+    background-color: white;
     border: none !important;
     padding: 10px;
     
@@ -54,10 +54,10 @@ background-color: white;
     background-color: white;
     border: none;
     font-family: Roboto;
-font-size: 24px;
-font-weight: 500;
-line-height: 33px;
-letter-spacing: 0em;
-text-align: left;
-color: #474955
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 33px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #474955
 }
