@@ -12,10 +12,10 @@ export function Main() {
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(10);
-  const [search, setSearch] = useState(false); //поиск по всем страница таблицы
-  const [sortOrderById, setSortOrderById] = useState('asc');
-  const [sortOrderByTitle, setSortOrderByTitle] = useState('asc');
-  const [sortOrderByBody, setSortOrderByBody] = useState('asc');
+  const [search, setSearch] = useState('');
+  const [sortOrderById, setSortOrderById] = useState('');
+  const [sortOrderByTitle, setSortOrderByTitle] = useState('');
+  const [sortOrderByBody, setSortOrderByBody] = useState('');
   const [postsSorted, setPostsSorted] = useState([]);
   const [postsBySearch, setPostsBySearch] = useState([]);
 
@@ -48,22 +48,30 @@ export function Main() {
 
   useEffect(() => {
     if (search) {
-      const searched = all.filter(
-        (post) =>
-          String(post.id).includes(search) ||
-          String(post.title).includes(search) ||
-          String(post.body).includes(search)
-      );
+      const searched = all.filter((post) => {
+        return (
+          post.id.toString().toLowerCase().includes(search.toLowerCase()) ||
+          post.title.toString().toLowerCase().includes(search.toLowerCase()) ||
+          post.body.toString().toLowerCase().includes(search.toLowerCase())
+        );
+      });
       setPostsBySearch(searched);
     } else {
-      setSearch([]);
+      setPostsBySearch([]);
     }
   }, [search, all]);
 
   useEffect(() => {
     if (sortOrderById === 'desc') {
+      setPostsSorted([]);
       let sortedPosts = [...all];
       sortedPosts = sortedPosts.sort((a, b) => (a.id > b.id ? -1 : 1));
+      setPostsSorted(sortedPosts);
+      return;
+    } else if (sortOrderById === 'asc') {
+      setPostsSorted([]);
+      let sortedPosts = [...all];
+      sortedPosts = sortedPosts.sort((a, b) => (a.id > b.id ? 1 : -1));
       setPostsSorted(sortedPosts);
     } else {
       setPostsSorted([]);
@@ -72,8 +80,16 @@ export function Main() {
 
   useEffect(() => {
     if (sortOrderByTitle === 'desc') {
+      setPostsSorted([]);
       let sortedPosts = [...all];
       sortedPosts = sortedPosts.sort((a, b) => (a.title > b.title ? -1 : 1));
+      setPostsSorted(sortedPosts);
+      return;
+    }
+    if (sortOrderByTitle === 'asc') {
+      setPostsSorted([]);
+      let sortedPosts = [...all];
+      sortedPosts = sortedPosts.sort((a, b) => (a.title > b.title ? 1 : -1));
       setPostsSorted(sortedPosts);
     } else {
       setPostsSorted([]);
@@ -82,8 +98,16 @@ export function Main() {
 
   useEffect(() => {
     if (sortOrderByBody === 'desc') {
+      setPostsSorted([]);
       let sortedPosts = [...all];
       sortedPosts = sortedPosts.sort((a, b) => (a.body > b.body ? -1 : 1));
+      setPostsSorted(sortedPosts);
+      return;
+    }
+    if (sortOrderByBody === 'asc') {
+      setPostsSorted([]);
+      let sortedPosts = [...all];
+      sortedPosts = sortedPosts.sort((a, b) => (a.body > b.body ? 1 : -1));
       setPostsSorted(sortedPosts);
     } else {
       setPostsSorted([]);
@@ -102,6 +126,9 @@ export function Main() {
             setSortOrderById={setSortOrderById}
             setSortOrderByTitle={setSortOrderByTitle}
             setSortOrderByBody={setSortOrderByBody}
+            sortOrderById={sortOrderById}
+            sortOrderByTitle={sortOrderByTitle}
+            sortOrderByBody={sortOrderByBody}
           />
           <PostsPagination
             setCurrentPage={setCurrentPage}

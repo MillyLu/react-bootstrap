@@ -1,6 +1,5 @@
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
-import { useState } from 'react';
 
 import { PostItem } from '../postItem/PostItem';
 
@@ -11,36 +10,33 @@ export function PostsTable({
   setSortOrderById,
   setSortOrderByTitle,
   setSortOrderByBody,
+  sortOrderById,
+  sortOrderByTitle,
+  sortOrderByBody,
 }) {
-  const [valueId, setValueId] = useState('asc');
-  const [valueTitle, setValueTitle] = useState('asc');
-  const [valueBody, setValueBody] = useState('asc');
+  const resetSortValue = () => {
+    setSortOrderByTitle('');
+    setSortOrderByBody('');
+    setSortOrderById('');
+  };
 
   const handleSortById = (event) => {
     const sortValue = event.target.value;
     if (sortValue === 'asc') {
-      setValueId('asc');
+      resetSortValue();
       setSortOrderById('asc');
     } else if (sortValue === 'desc') {
-      setValueId('desc');
-      setValueTitle('asc');
-      setValueBody('asc');
-      setSortOrderByTitle('asc');
-      setSortOrderByBody('asc');
+      resetSortValue();
       setSortOrderById('desc');
     }
   };
   const handleSortByTitle = (event) => {
     const sortValue = event.target.value;
     if (sortValue === 'asc') {
-      setValueTitle('asc');
+      resetSortValue();
       setSortOrderByTitle('asc');
     } else if (sortValue === 'desc') {
-      setValueTitle('desc');
-      setValueId('asc');
-      setValueBody('asc');
-      setSortOrderById('asc');
-      setSortOrderByBody('asc');
+      resetSortValue();
       setSortOrderByTitle('desc');
     }
   };
@@ -48,14 +44,10 @@ export function PostsTable({
   const handleSortByBody = (event) => {
     const sortValue = event.target.value;
     if (sortValue === 'asc') {
+      resetSortValue();
       setSortOrderByBody('asc');
-      setValueBody('asc');
     } else if (sortValue === 'desc') {
-      setValueBody('desc');
-      setValueId('asc');
-      setValueTitle('asc');
-      setSortOrderByTitle('asc');
-      setSortOrderById('asc');
+      resetSortValue();
       setSortOrderByBody('desc');
     }
   };
@@ -71,10 +63,11 @@ export function PostsTable({
                 className="filter"
                 aria-label="Header select id"
                 onChange={handleSortById}
-                value={valueId}
+                value={sortOrderById}
               >
-                <option value="asc">ID</option>
-                <option value="desc">ID ⇧</option>
+                <option value="">ID</option>
+                <option value="asc">ID ↓</option>
+                <option value="desc">ID ↑</option>
               </Form.Select>
             </th>
             <th className="header_title">
@@ -83,10 +76,11 @@ export function PostsTable({
                 className="filter_header"
                 aria-label="Header select title"
                 onChange={handleSortByTitle}
-                value={valueTitle}
+                value={sortOrderByTitle}
               >
-                <option value="asc">Заголовок</option>
-                <option value="desc">Заголовок ⇧</option>
+                <option value="">Заголовок</option>
+                <option value="asc">Заголовок ↓</option>
+                <option value="desc">Заголовок ↑</option>
               </Form.Select>
             </th>
             <th className="header">
@@ -94,10 +88,11 @@ export function PostsTable({
                 className="filter_description"
                 aria-label="Header select description"
                 onChange={handleSortByBody}
-                value={valueBody}
+                value={sortOrderByBody}
               >
-                <option value="asc">Описание</option>
-                <option value="desc">Описание ⇧</option>
+                <option value="">Описание</option>
+                <option value="asc">Описание ↓</option>
+                <option value="desc">Описание ↑</option>
               </Form.Select>
             </th>
           </tr>
