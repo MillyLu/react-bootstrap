@@ -54,7 +54,7 @@ export function PostsTable({
 
   return (
     <div className="posts">
-      <Table bordered hover bs-body-bg-table>
+      <Table bordered hover bs-body-bg-table={+true}>
         <thead>
           <tr className="header_main">
             <th className="header_id">
