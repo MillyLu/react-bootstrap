@@ -1,7 +1,7 @@
 import Pagination from 'react-bootstrap/Pagination';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './index.module.css';
+import '../../custom.scss';
 
 export function PostsPagination({ setCurrentPage, allPages }) {
   const [active, setActive] = useState(1);
@@ -16,9 +16,7 @@ export function PostsPagination({ setCurrentPage, allPages }) {
           navigate(`/${number}`);
         }}
         className={
-          active === number
-            ? styles.pagination_number__active
-            : styles.pagination_number
+          active === number ? 'pagination_number__active' : 'pagination_number'
         }
         key={number}
       >
@@ -50,19 +48,13 @@ export function PostsPagination({ setCurrentPage, allPages }) {
     }
   };
   return (
-    <Pagination className={styles.pagination}>
-      <button
-        className={styles.pagination_btn}
-        onClick={() => handlePrev(active)}
-      >
+    <Pagination className="pagination">
+      <button className="pagination_btn" onClick={() => handlePrev(active)}>
         Назад
       </button>
-      <div className={styles.pagination_list}>{items}</div>
+      <div className="pagination_list">{items}</div>
 
-      <button
-        className={styles.pagination_btn}
-        onClick={() => handleNext(active)}
-      >
+      <button className="pagination_btn" onClick={() => handleNext(active)}>
         Далее
       </button>
     </Pagination>

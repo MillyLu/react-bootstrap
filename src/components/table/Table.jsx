@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { PostItem } from '../postItem/PostItem';
 
-import styles from './index.module.css';
+import '../../custom.scss';
 
 export function PostsTable({
   posts,
@@ -61,14 +61,14 @@ export function PostsTable({
   };
 
   return (
-    <div className={styles.posts}>
-      <Table bordered hover>
+    <div className="posts">
+      <Table bordered hover bs-body-bg-table>
         <thead>
-          <tr className={styles.header_main}>
-            <th className={styles.header_id}>
+          <tr className="header_main">
+            <th className="header_id">
               {' '}
               <Form.Select
-                className={styles.filter}
+                className="filter"
                 aria-label="Header select id"
                 onChange={handleSortById}
                 value={valueId}
@@ -77,10 +77,10 @@ export function PostsTable({
                 <option value="desc">ID ⇧</option>
               </Form.Select>
             </th>
-            <th className={styles.header_title}>
+            <th className="header_title">
               {' '}
               <Form.Select
-                className={styles.filter_header}
+                className="filter_header"
                 aria-label="Header select title"
                 onChange={handleSortByTitle}
                 value={valueTitle}
@@ -89,9 +89,9 @@ export function PostsTable({
                 <option value="desc">Заголовок ⇧</option>
               </Form.Select>
             </th>
-            <th className={styles.header}>
+            <th className="header">
               <Form.Select
-                className={styles.filter_description}
+                className="filter_description"
                 aria-label="Header select description"
                 onChange={handleSortByBody}
                 value={valueBody}
