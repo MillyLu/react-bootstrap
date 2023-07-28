@@ -1,5 +1,5 @@
-import styles from './index.module.css';
+import '../../custom.scss';
 
 export function Loader() {
-  return <span className={styles.loader}></span>;
+  return <span className="loader"></span>;
 }

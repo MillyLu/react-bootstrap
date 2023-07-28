@@ -1,7 +1,7 @@
-import './App.css';
+import './App.scss';
 import { AppRoutes } from './routes';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
