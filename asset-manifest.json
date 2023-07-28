@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/react-bootstrap/static/css/main.6347c897.css",
-    "main.js": "/react-bootstrap/static/js/main.8e279c3d.js",
+    "main.css": "/react-bootstrap/static/css/main.ca4f307f.css",
+    "main.js": "/react-bootstrap/static/js/main.84a153a8.js",
     "static/media/Roboto-Italic.ttf": "/react-bootstrap/static/media/Roboto-Italic.fd2f4680cd1e2c929dad.ttf",
     "static/media/Roboto-Regular.ttf": "/react-bootstrap/static/media/Roboto-Regular.cfe3602cde0ad1c9ae0e.ttf",
     "index.html": "/react-bootstrap/index.html",
-    "main.6347c897.css.map": "/react-bootstrap/static/css/main.6347c897.css.map",
-    "main.8e279c3d.js.map": "/react-bootstrap/static/js/main.8e279c3d.js.map"
+    "main.ca4f307f.css.map": "/react-bootstrap/static/css/main.ca4f307f.css.map",
+    "main.84a153a8.js.map": "/react-bootstrap/static/js/main.84a153a8.js.map"
   },
   "entrypoints": [
-    "static/css/main.6347c897.css",
-    "static/js/main.8e279c3d.js"
+    "static/css/main.ca4f307f.css",
+    "static/js/main.84a153a8.js"
   ]
 }
