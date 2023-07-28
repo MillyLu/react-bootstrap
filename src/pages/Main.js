@@ -5,6 +5,7 @@ import { Container } from '../components/container/Container';
 import { PostsTable } from '../components/table/Table';
 import { PostsPagination } from '../components/pagination/Pagination';
 import { Loader } from '../components/loader/Loader';
+import { useParams } from 'react-router-dom';
 
 import { fetchPosts } from '../store/postsSlice';
 
@@ -19,6 +20,16 @@ export function Main() {
   const [postsSorted, setPostsSorted] = useState([]);
   const [postsBySearch, setPostsBySearch] = useState([]);
 
+  const params = useParams();
+  const pageNum = params.id;
+
+  useEffect(() => {
+    if (pageNum) {
+      setCurrentPage(pageNum);
+    }
+    return;
+  }, [currentPage, pageNum]);
+
   const all = useSelector((state) => state.posts.posts);
   const allPages =
     postsBySearch.length >= 1
@@ -32,10 +43,10 @@ export function Main() {
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
   const currentPosts =
-    postsSorted.length > 0
-      ? postsSorted.slice(firstPostIndex, lastPostIndex)
-      : postsBySearch.length >= 1
+    postsBySearch.length > 0
       ? postsBySearch.slice(firstPostIndex, lastPostIndex)
+      : postsSorted.length > 0
+      ? postsSorted.slice(firstPostIndex, lastPostIndex)
       : all.slice(firstPostIndex, lastPostIndex);
 
   useEffect(() => {
@@ -62,64 +73,36 @@ export function Main() {
   }, [search, all]);
 
   useEffect(() => {
+    setPostsSorted([]);
+    let sortedPosts = [...all];
+
     if (sortOrderById === 'desc') {
-      setPostsSorted([]);
-      let sortedPosts = [...all];
       sortedPosts = sortedPosts.sort((a, b) => (a.id > b.id ? -1 : 1));
-      setPostsSorted(sortedPosts);
-      return;
     } else if (sortOrderById === 'asc') {
-      setPostsSorted([]);
-      let sortedPosts = [...all];
       sortedPosts = sortedPosts.sort((a, b) => (a.id > b.id ? 1 : -1));
-      setPostsSorted(sortedPosts);
-    } else {
-      setPostsSorted([]);
     }
-  }, [sortOrderById, all]);
 
-  useEffect(() => {
     if (sortOrderByTitle === 'desc') {
-      setPostsSorted([]);
-      let sortedPosts = [...all];
       sortedPosts = sortedPosts.sort((a, b) => (a.title > b.title ? -1 : 1));
-      setPostsSorted(sortedPosts);
-      return;
-    }
-    if (sortOrderByTitle === 'asc') {
-      setPostsSorted([]);
-      let sortedPosts = [...all];
+    } else if (sortOrderByTitle === 'asc') {
       sortedPosts = sortedPosts.sort((a, b) => (a.title > b.title ? 1 : -1));
-      setPostsSorted(sortedPosts);
-    } else {
-      setPostsSorted([]);
     }
-  }, [sortOrderByTitle, all]);
 
-  useEffect(() => {
     if (sortOrderByBody === 'desc') {
-      setPostsSorted([]);
-      let sortedPosts = [...all];
       sortedPosts = sortedPosts.sort((a, b) => (a.body > b.body ? -1 : 1));
-      setPostsSorted(sortedPosts);
-      return;
-    }
-    if (sortOrderByBody === 'asc') {
-      setPostsSorted([]);
-      let sortedPosts = [...all];
+    } else if (sortOrderByBody === 'asc') {
       sortedPosts = sortedPosts.sort((a, b) => (a.body > b.body ? 1 : -1));
-      setPostsSorted(sortedPosts);
-    } else {
-      setPostsSorted([]);
     }
-  }, [sortOrderByBody, all]);
+
+    setPostsSorted(sortedPosts);
+  }, [sortOrderById, sortOrderByTitle, sortOrderByBody, all]);
 
   return (
     <Container>
       <Search setSearch={setSearch} />
       {loading && <Loader />}
       {postsError && <p>Упс..какая-то ошибка :(</p>}
-      {all.length >= 1 && (
+      {currentPosts.length >= 1 && (
         <>
           <PostsTable
             posts={currentPosts}
@@ -133,6 +116,7 @@ export function Main() {
           <PostsPagination
             setCurrentPage={setCurrentPage}
             allPages={allPages}
+            currentPage={currentPage}
           />
         </>
       )}
