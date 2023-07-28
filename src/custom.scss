@@ -291,6 +291,14 @@ th.header, th.header_id, th.header_title{
       }
   }
 
+  @media (max-width: 425px) {
+    *{font-size: 10px;}
+    .contain {
+        font-size: 11px;
+        max-width: 425px;
+      }
+  }
+
 
 
 
