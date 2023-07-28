@@ -5,7 +5,7 @@ import { Container } from '../components/container/Container';
 import { PostsTable } from '../components/table/Table';
 import { PostsPagination } from '../components/pagination/Pagination';
 import { Loader } from '../components/loader/Loader';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { fetchPosts } from '../store/postsSlice';
 
@@ -19,6 +19,7 @@ export function Main() {
   const [sortOrderByBody, setSortOrderByBody] = useState('');
   const [postsSorted, setPostsSorted] = useState([]);
   const [postsBySearch, setPostsBySearch] = useState([]);
+  const navigate = useNavigate();
 
   const params = useParams();
   const pageNum = params.id;
@@ -66,11 +67,13 @@ export function Main() {
           post.body.toString().toLowerCase().includes(search.toLowerCase())
         );
       });
+      navigate('/1');
+      setCurrentPage(1);
       setPostsBySearch(searched);
     } else {
       setPostsBySearch([]);
     }
-  }, [search, all]);
+  }, [search, all, pageNum, navigate, currentPage]);
 
   useEffect(() => {
     setPostsSorted([]);

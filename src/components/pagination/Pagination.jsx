@@ -1,12 +1,20 @@
 import Pagination from 'react-bootstrap/Pagination';
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 import '../../custom.scss';
 
 export function PostsPagination({ setCurrentPage, allPages, currentPage }) {
   const [activeItem, setActiveItem] = useState(currentPage);
   const navigate = useNavigate();
+  const params = useParams();
+  const pageNum = params.id;
+  useEffect(() => {
+    if (pageNum) {
+      setActiveItem(pageNum);
+    }
+  }, [pageNum]);
   const items = Array.from({ length: allPages }, (_, index) => index + 1).map(
     (number) => (
       <button
@@ -16,7 +24,7 @@ export function PostsPagination({ setCurrentPage, allPages, currentPage }) {
           navigate(`/${number}`);
         }}
         className={
-          number === activeItem
+          +number === +activeItem
             ? 'pagination_number__active'
             : 'pagination_number'
         }
